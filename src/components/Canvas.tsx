@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import {
-  Stage,
+  Stage as Fretboard,
   Layer,
   Circle,
   Rect,
@@ -21,11 +21,11 @@ export default function Canvas(dimensions: Dimensions) {
   useStrictMode(true)
 
   return (
-    <Stage {...dimensions}>
+    <Fretboard {...dimensions}>
       <Wood {...dimensions} />
       <FretWires {...dimensions} />
       <Strings {...dimensions} />
-    </Stage>
+    </Fretboard>
   )
 }
 

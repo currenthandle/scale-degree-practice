@@ -30,7 +30,7 @@ export default function Home() {
   return (
     <main className='h-full max-h-full'>
       <div
-        className='w-8/12 aspect-video border-red-400 border-box m-auto'
+        className='w-8/12 aspect-video border-red-400 border-box m-auto pt-10'
         ref={container}
       >
         <Canvas width={width} height={height} />
