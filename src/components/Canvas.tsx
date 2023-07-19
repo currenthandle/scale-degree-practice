@@ -15,6 +15,7 @@ interface Dimensions {
 }
 
 const NUM_FRETS = 8
+const NUM_STRINGS = 6
 
 export default function Canvas(dimensions: Dimensions) {
   useStrictMode(true)
@@ -23,6 +24,7 @@ export default function Canvas(dimensions: Dimensions) {
     <Stage {...dimensions}>
       <Wood {...dimensions} />
       <FretWires {...dimensions} />
+      <Strings {...dimensions} />
     </Stage>
   )
 }
@@ -57,6 +59,29 @@ function FretWires({ width, height }: Dimensions) {
               stroke='grey'
               lineCap='round'
               strokeWidth={7}
+            />
+          )
+        })}
+    </Layer>
+  )
+}
+
+function Strings({ width, height }: Dimensions) {
+  return (
+    <Layer>
+      {Array(NUM_STRINGS - 1)
+        .fill('')
+        .map((_, i) => {
+          const [xStart, xEnd] = [0, width]
+          const y = (height / NUM_STRINGS) * (i + 1)
+
+          return (
+            <Line
+              key={i}
+              points={[xStart, y, xEnd, y]}
+              stroke='silver'
+              lineCap='round'
+              strokeWidth={3}
             />
           )
         })}
