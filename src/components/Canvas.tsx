@@ -72,17 +72,18 @@ function Strings({ width, height }: Dimensions) {
       {Array(NUM_STRINGS)
         .fill('')
         .map((_, i) => {
-          const stringSpan = height * 0.9
+          const stringSpan = height * 0.8
           const offset = (height - stringSpan) / 2
 
           const [xStart, xEnd] = [0, width]
           const y = (stringSpan / (NUM_STRINGS - 1)) * i + offset
+          const color = i > 1 ? 'orange' : 'silver'
 
           return (
             <Line
               key={i}
               points={[xStart, y, xEnd, y]}
-              stroke='red'
+              stroke={color}
               lineCap='round'
               strokeWidth={5}
             />
