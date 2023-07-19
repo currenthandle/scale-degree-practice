@@ -36,8 +36,8 @@ function Wood({ width, height }: Dimensions) {
         height={height}
         width={width}
         fill='tan'
-        stroke='black'
-        strokeWidth={10}
+        // stroke='black'
+        // strokeWidth={10}
       />
     </Layer>
   )
@@ -69,19 +69,22 @@ function FretWires({ width, height }: Dimensions) {
 function Strings({ width, height }: Dimensions) {
   return (
     <Layer>
-      {Array(NUM_STRINGS - 1)
+      {Array(NUM_STRINGS)
         .fill('')
         .map((_, i) => {
+          const stringSpan = height * 0.9
+          const offset = (height - stringSpan) / 2
+
           const [xStart, xEnd] = [0, width]
-          const y = (height / NUM_STRINGS) * (i + 1)
+          const y = (stringSpan / (NUM_STRINGS - 1)) * i + offset
 
           return (
             <Line
               key={i}
               points={[xStart, y, xEnd, y]}
-              stroke='silver'
+              stroke='red'
               lineCap='round'
-              strokeWidth={3}
+              strokeWidth={5}
             />
           )
         })}
