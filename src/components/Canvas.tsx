@@ -25,6 +25,7 @@ export default function Canvas(dimensions: Dimensions) {
       <Wood {...dimensions} />
       <FretWires {...dimensions} />
       <Strings {...dimensions} />
+      {/* Notes */}
     </Fretboard>
   )
 }
@@ -32,13 +33,7 @@ export default function Canvas(dimensions: Dimensions) {
 function Wood({ width, height }: Dimensions) {
   return (
     <Layer>
-      <Rect
-        height={height}
-        width={width}
-        fill='tan'
-        // stroke='black'
-        // strokeWidth={10}
-      />
+      <Rect height={height} width={width} fill='tan' />
     </Layer>
   )
 }
@@ -46,11 +41,14 @@ function Wood({ width, height }: Dimensions) {
 function FretWires({ width, height }: Dimensions) {
   return (
     <Layer>
-      {Array(NUM_FRETS - 1)
+      {Array(NUM_FRETS + 1)
         .fill('')
         .map((_, i) => {
+          const fretSpan = width * 0.95
+          const offset = (width - fretSpan) / 2
+
           const [yStart, yEnd] = [0, height]
-          const x = (width / NUM_FRETS) * (i + 1)
+          const x = (fretSpan / NUM_FRETS) * i + offset
 
           return (
             <Line
@@ -92,3 +90,5 @@ function Strings({ width, height }: Dimensions) {
     </Layer>
   )
 }
+
+// functino
