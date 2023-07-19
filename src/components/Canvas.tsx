@@ -14,7 +14,7 @@ interface Dimensions {
   height: number
 }
 
-const NUM_FRETS = 8
+const NUM_FRETS = 6
 const NUM_STRINGS = 6
 
 export default function Canvas(dimensions: Dimensions) {
