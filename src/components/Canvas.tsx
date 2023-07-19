@@ -17,6 +17,14 @@ interface Dimensions {
 const NUM_FRETS = 6
 const NUM_STRINGS = 6
 
+function getFretSpan(width: number) {
+  return width * 0.95
+}
+
+function getStringSpan(height: number) {
+  return height * 0.8
+}
+
 export default function Canvas(dimensions: Dimensions) {
   useStrictMode(true)
 
@@ -25,7 +33,7 @@ export default function Canvas(dimensions: Dimensions) {
       <Wood {...dimensions} />
       <FretWires {...dimensions} />
       <Strings {...dimensions} />
-      {/* Notes */}
+      <Notes {...dimensions} />
     </Fretboard>
   )
 }
@@ -44,7 +52,7 @@ function FretWires({ width, height }: Dimensions) {
       {Array(NUM_FRETS + 1)
         .fill('')
         .map((_, i) => {
-          const fretSpan = width * 0.95
+          const fretSpan = getFretSpan(width)
           const offset = (width - fretSpan) / 2
 
           const [yStart, yEnd] = [0, height]
@@ -70,7 +78,8 @@ function Strings({ width, height }: Dimensions) {
       {Array(NUM_STRINGS)
         .fill('')
         .map((_, i) => {
-          const stringSpan = height * 0.8
+          // const stringSpan = height * 0.8
+          const stringSpan = getStringSpan(height)
           const offset = (height - stringSpan) / 2
 
           const [xStart, xEnd] = [0, width]
@@ -91,4 +100,13 @@ function Strings({ width, height }: Dimensions) {
   )
 }
 
-// functino
+function Notes({ width, height }: Dimensions) {
+  const stringSpan = getStringSpan(height)
+  const fretSpan = getFretSpan(width)
+
+  return (
+    <Layer>
+      <Circle radius={10} fill='black' />
+    </Layer>
+  )
+}
