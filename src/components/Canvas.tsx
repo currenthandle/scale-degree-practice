@@ -42,24 +42,19 @@ function Wood({ width, height }: Dimensions) {
 }
 
 function FretWires({ width, height }: Dimensions) {
-  console.log('fretwires')
   return (
     <Layer>
-      {/* <Line points={[0, 0, 0, height]} stroke='red' strokeWidth={7} /> */}
       {Array(NUM_FRETS - 1)
-        .fill('f')
+        .fill('')
         .map((_, i) => {
-          console.log('loop')
           const [yStart, yEnd] = [0, height]
           const x = (width / NUM_FRETS) * (i + 1)
-          console.log('x', x)
-          console.log('yStart', yStart)
-          console.log('yEnd', yEnd)
+
           return (
             <Line
               key={i}
-              points={[x, yStart, x, yEnd]}
-              stroke='red'
+              points={[x, yStart + 5, x, yEnd - 5]}
+              stroke='grey'
               lineCap='round'
               strokeWidth={7}
             />
