@@ -2,6 +2,7 @@ import {
   getFretOffset,
   getFretSpacing,
   getFretSpan,
+  getNoteCoordinates,
   getStringOffset,
   getStringSpacing,
   getStringSpan,
@@ -18,33 +19,7 @@ import {
 } from 'react-konva'
 
 import { NUM_FRETS, NUM_STRINGS, NOTE_RADIUS } from '@/utils/constants'
-
-interface Dimensions {
-  width: number
-  height: number
-}
-
-interface Position {
-  string: number
-  fret: number
-}
-function getNoteCoordinates(
-  { string, fret }: Position,
-  { width, height }: Dimensions
-) {
-  const fretOffset = getFretOffset(width)
-  const stringOffset = getStringOffset(height)
-
-  const fretSpacing = getFretSpacing(width)
-  const stringSpacing = getStringSpacing(height)
-
-  const x = fretOffset + fretSpacing * (fret - 1 / 2)
-  const y = stringOffset + stringSpacing * string
-  return {
-    x,
-    y,
-  }
-}
+import { Dimensions } from '@/utils/types'
 
 export default function FretboardCanvas(dimensions: Dimensions) {
   useStrictMode(true)
@@ -121,15 +96,15 @@ function Strings({ width, height }: Dimensions) {
 }
 
 function Notes({ width, height }: Dimensions) {
-  // const fretOffset = getFretOffset(width)
-  // const stringOffset = getStringOffset(height)
-  // const fretSpacing = getFretSpacing(width)
-  // const x = fretOffset + fretSpacing / 2
-  // const y = stringOffset
-  const { x, y } = getNoteCoordinates({ string: 6, fret: 2 }, { width, height })
+  const bass = { string: 6, fret: 2 }
+  const { x, y } = getNoteCoordinates(
+    { string: bass.string, fret: bass.fret },
+    { width, height }
+  )
 
   return (
     <Layer>
+      {/* Bass Note */}
       <Circle radius={NOTE_RADIUS} fill='black' x={x} y={y} />
     </Layer>
   )

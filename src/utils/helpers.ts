@@ -4,6 +4,7 @@ import {
   NUM_STRINGS,
   STRING_SPAN_RATIO,
 } from './constants'
+import { Dimensions, Position } from './types'
 
 export function getFretSpan(width: number) {
   return width * FRET_SPAN_RATIO
@@ -31,4 +32,22 @@ export function getFretSpacing(width: number) {
 export function getStringSpacing(height: number) {
   const stringSpan = getStringSpan(height)
   return stringSpan / NUM_STRINGS
+}
+
+export function getNoteCoordinates(
+  { string, fret }: Position,
+  { width, height }: Dimensions
+) {
+  const fretOffset = getFretOffset(width)
+  const stringOffset = getStringOffset(height)
+
+  const fretSpacing = getFretSpacing(width)
+  const stringSpacing = getStringSpacing(height)
+
+  const x = fretOffset + fretSpacing * (fret - 1 / 2)
+  const y = stringOffset + stringSpacing * string
+  return {
+    x,
+    y,
+  }
 }
