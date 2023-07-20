@@ -6,13 +6,13 @@ export const STRING_SPAN_RATIO = 0.8
 
 export const SCALE_DEGREES = [
   '1',
-  'b2',
+  // 'b2',
   '2',
   'b3',
   '3',
   '4',
   '#4',
-  'b5',
+  // 'b5',
   '5',
   'b6',
   '6',
