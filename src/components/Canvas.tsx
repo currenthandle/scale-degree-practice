@@ -103,21 +103,25 @@ function Strings({ width, height }: Dimensions) {
 }
 
 function Notes({ width, height }: Dimensions) {
-  const bass = { string: 1, fret: 2 }
+  const bass = { string: 6, fret: 2 }
   const { x, y } = getNoteCoordinates(
     { string: bass.string, fret: bass.fret },
     { width, height }
   )
 
-  // const scaleDegree = getRandomScaleDegree()
-  // const scaleDegreePositions = getScaleDegreePositions(scaleDegree, bass)
+  const scaleDegree = getRandomScaleDegree()
+  console.log('')
+  console.log('scaleDegree', scaleDegree)
+  console.log('render notes')
+  const scaleDegreePositions = getScaleDegreePositions(scaleDegree, bass)
+  console.log('scaleDegreePositions', scaleDegreePositions)
 
   return (
     <Layer>
       {/* Bass Note */}
       <Circle radius={NOTE_RADIUS} fill='black' x={x} y={y} />
 
-      {/* {scaleDegreePositions.map((note, i) => {
+      {scaleDegreePositions.map((note, i) => {
         const { string, fret } = note
         const { x, y } = getNoteCoordinates({ string, fret }, { width, height })
 
@@ -131,7 +135,7 @@ function Notes({ width, height }: Dimensions) {
             // opacity={0.5}
           />
         )
-      })} */}
+      })}
     </Layer>
   )
 }

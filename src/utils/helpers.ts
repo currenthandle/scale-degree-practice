@@ -101,18 +101,31 @@ export function getScaleDegreePositions(
 ) {
   const interval = getScaleDegreeInterval(scaleDegree)
   // E string
+  console.log('interval', interval)
   if (interval < 4) {
+    const scaleDegreePosition = {
+      string: 6,
+      fret: bassNotePosition.fret + interval,
+    }
     return [
-      ...(eOctave(bassNotePosition) as Position[]),
-      ...(gOctave(bassNotePosition) as Position[]),
+      ...(eOctave(scaleDegreePosition) as Position[]),
+      ...(gOctave(scaleDegreePosition) as Position[]),
     ]
   }
   if (interval < 8) {
+    const scaleDegreePosition = {
+      string: 5,
+      fret: bassNotePosition.fret + interval - 4,
+    }
     return [
-      ...(cOctave(bassNotePosition) as Position[]),
-      ...(aOctave(bassNotePosition) as Position[]),
+      ...(cOctave(scaleDegreePosition) as Position[]),
+      ...(aOctave(scaleDegreePosition) as Position[]),
     ]
   } else {
-    return dOctave(bassNotePosition) as Position[]
+    const scaleDegreePosition = {
+      string: 4,
+      fret: bassNotePosition.fret + interval - 8,
+    }
+    return dOctave(scaleDegreePosition) as Position[]
   }
 }
