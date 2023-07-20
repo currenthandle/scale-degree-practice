@@ -2,6 +2,7 @@ import {
   FRET_SPAN_RATIO,
   NUM_FRETS,
   NUM_STRINGS,
+  SCALE_DEGREES,
   STRING_SPAN_RATIO,
 } from './constants'
 import { Dimensions, Position, ScaleDegree } from './types'
@@ -81,10 +82,14 @@ function getScaleDegreeInterval(scaleDegree: ScaleDegree) {
   }
 }
 
-export function getScaleDegreeNotePositions(
-  scaleDegree: ScaleDegree,
-  bassNotePosition: Position
-): Position[] {
-  const interval = getScaleDegreeInterval(scaleDegree)
-  const notes: Position[] = []
+// export function getScaleDegreeNotePositions(
+//   scaleDegree: ScaleDegree,
+//   bassNotePosition: Position
+// ): Position[] {
+//   const interval = getScaleDegreeInterval(scaleDegree)
+//   const notes: Position[] = []
+// }
+
+export function getRandomScaleDegree() {
+  return SCALE_DEGREES[Math.floor(Math.random() * SCALE_DEGREES.length)]
 }
