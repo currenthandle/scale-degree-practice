@@ -5,7 +5,6 @@ import { ScaleDegree } from '@/utils/types'
 import dynamic from 'next/dynamic'
 import Image from 'next/image'
 import { useEffect, useRef, useState } from 'react'
-import { isNull } from 'util'
 
 const Canvas = dynamic(() => import('../components/Canvas'), {
   ssr: false,
@@ -19,20 +18,35 @@ export interface Dimensions {
 export default function Home() {
   const container = useRef<HTMLDivElement>(null)
   const [scaleDegree, setScaleDegree] = useState<ScaleDegree | undefined>()
+  const metronome = useRef<number | NodeJS.Timeout>()
   const [{ width, height }, setDimensions] = useState<Dimensions>({
     width: 0,
     height: 0,
   })
   useEffect(() => {
+    setScaleDegree(getRandomScaleDegree())
+
     if (!container.current) {
       return
     }
     const { width, height } = container.current.getBoundingClientRect()
     setDimensions({ width, height })
+
+    // wtf is this?
+    // const observer = new ResizeObserver((entries) => {
+    //   const { width, height } = entries[0].contentRect
+    //   setDimensions({ width, height })
+    // })
+
+    metronome.current = setInterval(() => {
+      setScaleDegree(getRandomScaleDegree())
+    }, 15000)
+
+    // observer.observe(container.current)
   }, [])
-  useEffect(() => {
-    setScaleDegree(getRandomScaleDegree())
-  }, [])
+  // useEffect(() => {
+  //   setScaleDegree(getRandomScaleDegree())
+  // }, [])
 
   return (
     <main className='h-full max-h-full'>
