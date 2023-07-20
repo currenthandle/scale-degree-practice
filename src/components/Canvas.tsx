@@ -122,11 +122,11 @@ function Notes({ width, height }: Dimensions) {
   // const scaleDegree = '6'
   // const scaleDegree = 'b7'
   // const scaleDegree = '7'
-  console.log('')
-  console.log('scaleDegree', scaleDegree)
-  console.log('render notes')
+  // console.log('')
+  // console.log('scaleDegree', scaleDegree)
+  // console.log('render notes')
   const scaleDegreePositions = getScaleDegreePositions(scaleDegree, bass)
-  console.log('scaleDegreePositions', scaleDegreePositions)
+  // console.log('scaleDegreePositions', scaleDegreePositions)
 
   return (
     <Layer>
@@ -135,7 +135,6 @@ function Notes({ width, height }: Dimensions) {
 
       {scaleDegreePositions.map((note, i) => {
         const { string, fret } = note
-        console.log('fret', fret)
         const { x, y } = getNoteCoordinates({ string, fret }, { width, height })
 
         return (
