@@ -26,11 +26,12 @@ import {
   NOTE_RADIUS,
   BASS_NOTE_POSITION,
 } from '@/utils/constants'
+import { Dimensions, ScaleDegree } from '@/utils/types'
 // import { Dimensions } from '@/utils/types'
 interface Props {
   width: number
   height: number
-  scaleDegree: string
+  scaleDegree: ScaleDegree | undefined
 }
 
 export default function FretboardCanvas({ width, height, scaleDegree }: Props) {
@@ -136,6 +137,9 @@ function Notes({ width, height, scaleDegree }: Props) {
   // console.log('')
   // console.log('scaleDegree', scaleDegree)
   // console.log('render notes')
+  if (!scaleDegree) {
+    return null
+  }
   const scaleDegreePositions = getScaleDegreePositions(
     scaleDegree,
     BASS_NOTE_POSITION
