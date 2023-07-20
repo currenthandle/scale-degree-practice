@@ -110,6 +110,18 @@ function Notes({ width, height }: Dimensions) {
   )
 
   const scaleDegree = getRandomScaleDegree()
+  // const scaleDegree = 'b2'
+  // const scaleDegree = '2'
+  // const scaleDegree = 'b3'
+  // const scaleDegree = '3'
+  // const scaleDegree = '4'
+  // const scaleDegree = '#4'
+  // const scaleDegree = 'b5'
+  // const scaleDegree = '5'
+  // const scaleDegree = 'b6'
+  // const scaleDegree = '6'
+  // const scaleDegree = 'b7'
+  // const scaleDegree = '7'
   console.log('')
   console.log('scaleDegree', scaleDegree)
   console.log('render notes')
@@ -123,6 +135,7 @@ function Notes({ width, height }: Dimensions) {
 
       {scaleDegreePositions.map((note, i) => {
         const { string, fret } = note
+        console.log('fret', fret)
         const { x, y } = getNoteCoordinates({ string, fret }, { width, height })
 
         return (
