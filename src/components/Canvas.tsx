@@ -8,7 +8,7 @@ import {
 } from '@/utils/helpers'
 import { useEffect, useState } from 'react'
 import {
-  Stage as Fretboard,
+  Stage,
   Layer,
   Circle,
   Rect,
@@ -46,16 +46,16 @@ function getNoteCoordinates(
   }
 }
 
-export default function Canvas(dimensions: Dimensions) {
+export default function FretboardCanvas(dimensions: Dimensions) {
   useStrictMode(true)
 
   return (
-    <Fretboard {...dimensions}>
+    <Stage {...dimensions}>
       <Wood {...dimensions} />
       <FretWires {...dimensions} />
       <Strings {...dimensions} />
       <Notes {...dimensions} />
-    </Fretboard>
+    </Stage>
   )
 }
 
@@ -121,9 +121,9 @@ function Strings({ width, height }: Dimensions) {
 }
 
 function Notes({ width, height }: Dimensions) {
-  const fretOffset = getFretOffset(width)
-  const stringOffset = getStringOffset(height)
-  const fretSpacing = getFretSpacing(width)
+  // const fretOffset = getFretOffset(width)
+  // const stringOffset = getStringOffset(height)
+  // const fretSpacing = getFretSpacing(width)
   // const x = fretOffset + fretSpacing / 2
   // const y = stringOffset
   const { x, y } = getNoteCoordinates({ string: 6, fret: 2 }, { width, height })
