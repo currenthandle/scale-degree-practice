@@ -63,7 +63,7 @@ function FretWires({ width, height }: Dimensions) {
         .fill('')
         .map((_, i) => {
           const fretSpan = getFretSpan(width)
-          const offset = getFretOffset(outerWidth)
+          const offset = getFretOffset(width)
 
           const [yStart, yEnd] = [0, height]
           const x = (fretSpan / NUM_FRETS) * i + offset
@@ -110,12 +110,12 @@ function Strings({ width, height }: Dimensions) {
 }
 
 function Notes({ width, height }: Dimensions) {
-  const stringSpan = getStringSpan(height)
-  const fretSpan = getFretSpan(width)
+  const fretOffset = getFretOffset(width)
+  const stringOffset = getStringOffset(height)
 
   return (
     <Layer>
-      <Circle radius={10} fill='black' />
+      <Circle radius={10} fill='black' x={fretOffset} y={stringOffset} />
     </Layer>
   )
 }
