@@ -20,18 +20,29 @@ import {
   Ring,
 } from 'react-konva'
 
-import { NUM_FRETS, NUM_STRINGS, NOTE_RADIUS } from '@/utils/constants'
-import { Dimensions } from '@/utils/types'
+import {
+  NUM_FRETS,
+  NUM_STRINGS,
+  NOTE_RADIUS,
+  BASS_NOTE_POSITION,
+} from '@/utils/constants'
+// import { Dimensions } from '@/utils/types'
+interface Props {
+  width: number
+  height: number
+  scaleDegree: string
+}
 
-export default function FretboardCanvas(dimensions: Dimensions) {
+export default function FretboardCanvas({ width, height, scaleDegree }: Props) {
   useStrictMode(true)
 
+  const dimensions = { width, height }
   return (
     <Stage {...dimensions}>
       <Wood {...dimensions} />
       <FretWires {...dimensions} />
       <Strings {...dimensions} />
-      <Notes {...dimensions} />
+      <Notes {...dimensions} scaleDegree={scaleDegree} />
     </Stage>
   )
 }
@@ -53,7 +64,7 @@ function FretWires({ width, height }: Dimensions) {
           const fretSpan = getFretSpan(width)
           const offset = getFretOffset(width)
 
-          const fretSpacing = getFretSpacing(width)
+          // const fretSpacing = getFretSpacing(width)
 
           const [yStart, yEnd] = [0, height]
           // const x = (fretSpan / NUM_FRETS) * i + offset
@@ -102,14 +113,14 @@ function Strings({ width, height }: Dimensions) {
   )
 }
 
-function Notes({ width, height }: Dimensions) {
-  const bass = { string: 6, fret: 2 }
+function Notes({ width, height, scaleDegree }: Props) {
+  // const bass = { string: 6, fret: 2 }
   const { x, y } = getNoteCoordinates(
-    { string: bass.string, fret: bass.fret },
+    { string: BASS_NOTE_POSITION.string, fret: BASS_NOTE_POSITION.fret },
     { width, height }
   )
 
-  const scaleDegree = getRandomScaleDegree()
+  // const scaleDegree = getRandomScaleDegree()
   // const scaleDegree = 'b2'
   // const scaleDegree = '2'
   // const scaleDegree = 'b3'
@@ -125,7 +136,10 @@ function Notes({ width, height }: Dimensions) {
   // console.log('')
   // console.log('scaleDegree', scaleDegree)
   // console.log('render notes')
-  const scaleDegreePositions = getScaleDegreePositions(scaleDegree, bass)
+  const scaleDegreePositions = getScaleDegreePositions(
+    scaleDegree,
+    BASS_NOTE_POSITION
+  )
   // console.log('scaleDegreePositions', scaleDegreePositions)
 
   return (

@@ -19,3 +19,5 @@ export const SCALE_DEGREES = [
   'b7',
   '7',
 ] as const
+
+export const BASS_NOTE_POSITION = { string: 6, fret: 2 }

@@ -58,6 +58,7 @@ function getScaleDegreeInterval(scaleDegree: ScaleDegree) {
   switch (scaleDegree) {
     case '1':
       return 0
+    // @ts-ignore
     case 'b2':
       return 1
     case '2':
@@ -70,6 +71,7 @@ function getScaleDegreeInterval(scaleDegree: ScaleDegree) {
       return 5
     case '#4':
       return 6
+    // @ts-ignore
     case 'b5':
       return 6
     case '5':
@@ -103,7 +105,7 @@ export function getScaleDegreePositions(
 ) {
   const interval = getScaleDegreeInterval(scaleDegree)
   // E string
-  console.log('interval', interval)
+  // console.log('interval', interval)
   if (interval <= 3) {
     const scaleDegreePosition = {
       string: 6,

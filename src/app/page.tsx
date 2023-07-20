@@ -1,4 +1,5 @@
 'use client'
+import { getRandomScaleDegree } from '@/utils/helpers'
 // import Canvas from '@/components/Canvas'
 import dynamic from 'next/dynamic'
 import Image from 'next/image'
@@ -26,13 +27,15 @@ export default function Home() {
     const { width, height } = container.current.getBoundingClientRect()
     setDimensions({ width, height })
   }, [])
+  const scaleDegree = getRandomScaleDegree()
+
   return (
     <main className='h-full max-h-full'>
       <div
         className='w-8/12 aspect-video border-red-400 border-box m-auto pt-10'
         ref={container}
       >
-        <Canvas width={width} height={height} />
+        <Canvas width={width} height={height} scaleDegree={scaleDegree} />
       </div>
     </main>
   )
