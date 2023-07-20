@@ -16,6 +16,7 @@ interface Dimensions {
 
 const NUM_FRETS = 6
 const NUM_STRINGS = 6
+const NOTE_RADIUS = 15
 
 function getFretSpan(width: number) {
   return width * 0.95
@@ -33,6 +34,38 @@ function getFretOffset(width: number) {
 function getStringOffset(height: number) {
   const stringSpan = getStringSpan(height)
   return (height - stringSpan) / 2
+}
+
+function getFretSpacing(width: number) {
+  const fretSpan = getFretSpan(width)
+  return fretSpan / NUM_FRETS
+}
+
+function getStringSpacing(height: number) {
+  const stringSpan = getStringSpan(height)
+  return stringSpan / NUM_STRINGS
+}
+
+interface Position {
+  string: number
+  fret: number
+}
+function getNoteCoordinates(
+  { string, fret }: Position,
+  { width, height }: Dimensions
+) {
+  const fretOffset = getFretOffset(width)
+  const stringOffset = getStringOffset(height)
+
+  const fretSpacing = getFretSpacing(width)
+  const stringSpacing = getStringSpacing(height)
+
+  const x = fretOffset + fretSpacing * (fret - 1 / 2)
+  const y = stringOffset + stringSpacing * string
+  return {
+    x,
+    y,
+  }
 }
 
 export default function Canvas(dimensions: Dimensions) {
@@ -112,10 +145,14 @@ function Strings({ width, height }: Dimensions) {
 function Notes({ width, height }: Dimensions) {
   const fretOffset = getFretOffset(width)
   const stringOffset = getStringOffset(height)
+  const fretSpacing = getFretSpacing(width)
+  // const x = fretOffset + fretSpacing / 2
+  // const y = stringOffset
+  const { x, y } = getNoteCoordinates({ string: 6, fret: 2 }, { width, height })
 
   return (
     <Layer>
-      <Circle radius={10} fill='black' x={fretOffset} y={stringOffset} />
+      <Circle radius={NOTE_RADIUS} fill='black' x={x} y={y} />
     </Layer>
   )
 }
