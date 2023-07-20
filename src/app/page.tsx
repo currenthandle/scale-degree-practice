@@ -19,7 +19,6 @@ export default function Home() {
     width: 0,
     height: 0,
   })
-  // get height and width of container
   useEffect(() => {
     if (!container.current) {
       return

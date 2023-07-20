@@ -5,6 +5,7 @@ import {
   SCALE_DEGREES,
   STRING_SPAN_RATIO,
 } from './constants'
+import { aOctave, cOctave, dOctave, eOctave, gOctave } from './octaveTransforms'
 import { Dimensions, Position, ScaleDegree } from './types'
 
 export function getFretSpan(width: number) {
@@ -92,4 +93,26 @@ function getScaleDegreeInterval(scaleDegree: ScaleDegree) {
 
 export function getRandomScaleDegree() {
   return SCALE_DEGREES[Math.floor(Math.random() * SCALE_DEGREES.length)]
+}
+
+export function getScaleDegreePositions(
+  scaleDegree: ScaleDegree,
+  bassNotePosition: Position
+) {
+  const interval = getScaleDegreeInterval(scaleDegree)
+  // E string
+  if (interval < 4) {
+    return [
+      ...(eOctave(bassNotePosition) as Position[]),
+      ...(gOctave(bassNotePosition) as Position[]),
+    ]
+  }
+  if (interval < 8) {
+    return [
+      ...(cOctave(bassNotePosition) as Position[]),
+      ...(aOctave(bassNotePosition) as Position[]),
+    ]
+  } else {
+    return dOctave(bassNotePosition) as Position[]
+  }
 }

@@ -3,6 +3,8 @@ import {
   getFretSpacing,
   getFretSpan,
   getNoteCoordinates,
+  getRandomScaleDegree,
+  getScaleDegreePositions,
   getStringOffset,
   getStringSpacing,
   getStringSpan,
@@ -102,10 +104,29 @@ function Notes({ width, height }: Dimensions) {
     { width, height }
   )
 
+  const scaleDegree = getRandomScaleDegree()
+  const scaleDegreePositions = getScaleDegreePositions(scaleDegree, bass)
+
   return (
     <Layer>
       {/* Bass Note */}
       <Circle radius={NOTE_RADIUS} fill='black' x={x} y={y} />
+
+      {scaleDegreePositions.map((note, i) => {
+        const { string, fret } = note
+        const { x, y } = getNoteCoordinates({ string, fret }, { width, height })
+
+        return (
+          <Circle
+            key={i}
+            radius={NOTE_RADIUS}
+            fill='red'
+            x={x}
+            y={y}
+            // opacity={0.5}
+          />
+        )
+      })}
     </Layer>
   )
 }
