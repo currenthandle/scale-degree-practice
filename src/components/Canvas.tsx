@@ -53,8 +53,11 @@ function FretWires({ width, height }: Dimensions) {
           const fretSpan = getFretSpan(width)
           const offset = getFretOffset(width)
 
+          const fretSpacing = getFretSpacing(width)
+
           const [yStart, yEnd] = [0, height]
-          const x = (fretSpan / NUM_FRETS) * i + offset
+          // const x = (fretSpan / NUM_FRETS) * i + offset
+          const x = getFretSpacing(width) * i + offset
 
           return (
             <Line
@@ -76,11 +79,13 @@ function Strings({ width, height }: Dimensions) {
       {Array(NUM_STRINGS)
         .fill('')
         .map((_, i) => {
-          const stringSpan = getStringSpan(height)
+          // const stringSpan = getStringSpan(height)
           const offset = getStringOffset(height)
+          const stringSpacing = getStringSpacing(height)
 
           const [xStart, xEnd] = [0, width]
-          const y = (stringSpan / (NUM_STRINGS - 1)) * i + offset
+          // const y = (stringSpan / (NUM_STRINGS - 1)) * i + offset
+          const y = stringSpacing * i + offset
           const color = i > 1 ? 'orange' : 'silver'
 
           return (
@@ -98,21 +103,21 @@ function Strings({ width, height }: Dimensions) {
 }
 
 function Notes({ width, height }: Dimensions) {
-  const bass = { string: 6, fret: 2 }
+  const bass = { string: 1, fret: 2 }
   const { x, y } = getNoteCoordinates(
     { string: bass.string, fret: bass.fret },
     { width, height }
   )
 
-  const scaleDegree = getRandomScaleDegree()
-  const scaleDegreePositions = getScaleDegreePositions(scaleDegree, bass)
+  // const scaleDegree = getRandomScaleDegree()
+  // const scaleDegreePositions = getScaleDegreePositions(scaleDegree, bass)
 
   return (
     <Layer>
       {/* Bass Note */}
       <Circle radius={NOTE_RADIUS} fill='black' x={x} y={y} />
 
-      {scaleDegreePositions.map((note, i) => {
+      {/* {scaleDegreePositions.map((note, i) => {
         const { string, fret } = note
         const { x, y } = getNoteCoordinates({ string, fret }, { width, height })
 
@@ -126,7 +131,7 @@ function Notes({ width, height }: Dimensions) {
             // opacity={0.5}
           />
         )
-      })}
+      })} */}
     </Layer>
   )
 }

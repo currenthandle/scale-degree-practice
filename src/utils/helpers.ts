@@ -33,7 +33,7 @@ export function getFretSpacing(width: number) {
 
 export function getStringSpacing(height: number) {
   const stringSpan = getStringSpan(height)
-  return stringSpan / NUM_STRINGS
+  return stringSpan / (NUM_STRINGS - 1)
 }
 
 export function getNoteCoordinates(
@@ -47,7 +47,7 @@ export function getNoteCoordinates(
   const stringSpacing = getStringSpacing(height)
 
   const x = fretOffset + fretSpacing * (fret - 1 / 2)
-  const y = stringOffset + stringSpacing * string
+  const y = stringOffset + stringSpacing * (string - 1)
   return {
     x,
     y,
