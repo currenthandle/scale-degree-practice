@@ -17,4 +17,4 @@ export const SCALE_DEGREES = [
   '6',
   'b7',
   '7',
-]
+] as const

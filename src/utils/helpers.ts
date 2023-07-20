@@ -4,7 +4,7 @@ import {
   NUM_STRINGS,
   STRING_SPAN_RATIO,
 } from './constants'
-import { Dimensions, Position } from './types'
+import { Dimensions, Position, ScaleDegree } from './types'
 
 export function getFretSpan(width: number) {
   return width * FRET_SPAN_RATIO
@@ -50,4 +50,41 @@ export function getNoteCoordinates(
     x,
     y,
   }
+}
+
+function getScaleDegreeInterval(scaleDegree: ScaleDegree) {
+  switch (scaleDegree) {
+    case '1':
+      return 0
+    case '2':
+      return 2
+    case 'b3':
+      return 3
+    case '3':
+      return 4
+    case '4':
+      return 5
+    case '#4':
+      return 6
+    case 'b5':
+      return 6
+    case '5':
+      return 7
+    case 'b6':
+      return 8
+    case '6':
+      return 9
+    case 'b7':
+      return 10
+    case '7':
+      return 11
+  }
+}
+
+export function getScaleDegreeNotePositions(
+  scaleDegree: ScaleDegree,
+  bassNotePosition: Position
+): Position[] {
+  const interval = getScaleDegreeInterval(scaleDegree)
+  const notes: Position[] = []
 }
