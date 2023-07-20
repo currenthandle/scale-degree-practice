@@ -25,6 +25,16 @@ function getStringSpan(height: number) {
   return height * 0.8
 }
 
+function getFretOffset(width: number) {
+  const fretSpan = getFretSpan(width)
+  return (width - fretSpan) / 2
+}
+
+function getStringOffset(height: number) {
+  const stringSpan = getStringSpan(height)
+  return (height - stringSpan) / 2
+}
+
 export default function Canvas(dimensions: Dimensions) {
   useStrictMode(true)
 
@@ -53,7 +63,7 @@ function FretWires({ width, height }: Dimensions) {
         .fill('')
         .map((_, i) => {
           const fretSpan = getFretSpan(width)
-          const offset = (width - fretSpan) / 2
+          const offset = getFretOffset(outerWidth)
 
           const [yStart, yEnd] = [0, height]
           const x = (fretSpan / NUM_FRETS) * i + offset
@@ -78,9 +88,8 @@ function Strings({ width, height }: Dimensions) {
       {Array(NUM_STRINGS)
         .fill('')
         .map((_, i) => {
-          // const stringSpan = height * 0.8
           const stringSpan = getStringSpan(height)
-          const offset = (height - stringSpan) / 2
+          const offset = getStringOffset(height)
 
           const [xStart, xEnd] = [0, width]
           const y = (stringSpan / (NUM_STRINGS - 1)) * i + offset
