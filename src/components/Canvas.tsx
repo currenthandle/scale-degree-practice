@@ -1,3 +1,11 @@
+import {
+  getFretOffset,
+  getFretSpacing,
+  getFretSpan,
+  getStringOffset,
+  getStringSpacing,
+  getStringSpan,
+} from '@/utils/helpers'
 import { useEffect, useState } from 'react'
 import {
   Stage as Fretboard,
@@ -9,41 +17,11 @@ import {
   Ring,
 } from 'react-konva'
 
+import { NUM_FRETS, NUM_STRINGS, NOTE_RADIUS } from '@/utils/constants'
+
 interface Dimensions {
   width: number
   height: number
-}
-
-const NUM_FRETS = 6
-const NUM_STRINGS = 6
-const NOTE_RADIUS = 15
-
-function getFretSpan(width: number) {
-  return width * 0.95
-}
-
-function getStringSpan(height: number) {
-  return height * 0.8
-}
-
-function getFretOffset(width: number) {
-  const fretSpan = getFretSpan(width)
-  return (width - fretSpan) / 2
-}
-
-function getStringOffset(height: number) {
-  const stringSpan = getStringSpan(height)
-  return (height - stringSpan) / 2
-}
-
-function getFretSpacing(width: number) {
-  const fretSpan = getFretSpan(width)
-  return fretSpan / NUM_FRETS
-}
-
-function getStringSpacing(height: number) {
-  const stringSpan = getStringSpan(height)
-  return stringSpan / NUM_STRINGS
 }
 
 interface Position {
